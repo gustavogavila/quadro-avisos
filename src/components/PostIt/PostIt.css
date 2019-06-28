@@ -5,5 +5,10 @@
   border: 1px solid #998f00;
   text-align: left;
   padding: 10px;
+  margin: 10px;
   box-shadow: 1px 1px 4px #333;
+}
+
+.lido {
+  background-color: #998f00;
 }

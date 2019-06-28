@@ -9,7 +9,7 @@ export default class PostItForm extends Component {
       remetente: "",
       destinatario: "",
       dataCriacao: "",
-      cor: "",
+      cor: "#ffee00",
       lido: false
     };
 
@@ -18,6 +18,13 @@ export default class PostItForm extends Component {
 
   salvar() {
     console.log(this.state);
+    this.setState({
+      remetente: "",
+      destinatario: "",
+      dataCriacao: "",
+      cor: "",
+      lido: false
+    });
   }
 
   render() {
@@ -68,6 +75,7 @@ export default class PostItForm extends Component {
               type="color"
               id="cor"
               name="cor"
+              value="#ffee00"
               onChange={cor => this.setState({ cor: cor.target.value })}
             />
           </div>
