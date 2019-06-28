@@ -1,0 +1,15 @@
+h1 {
+    margin: 0px;
+    padding: 0px;
+}
+
+.header {
+    text-align: center;
+    margin-top: 0px;
+    margin-bottom: 20px;
+    width: 100%;
+    height: 60px;
+    padding: 10px 0;
+    background-color: #7075CC;
+    color: #fff;
+}
