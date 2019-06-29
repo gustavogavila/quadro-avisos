@@ -36,8 +36,7 @@ export default class Main extends Component {
             destinatario: '',
             dataCriacao: moment().format('YYYY-MM-DD'),
             cor: '#ffee00',
-            lembrete: '',
-            list: []
+            lembrete: ''
         })
     }
 
@@ -49,13 +48,14 @@ export default class Main extends Component {
         while( i-- ) {
             values.push(JSON.parse(localStorage.getItem(keys[i])));
         }
-        console.log(values);
+        this.setState({...this.state, list: values});
     }
 
     handleAdd() {
         const postIt = JSON.stringify(this.state);
         localStorage.setItem(`postIt${this.state.id}`, postIt);
-        this.resetState();     
+        this.getAllPostIts();
+        this.resetState();
     }
 
     handleChange(e) {
@@ -93,7 +93,6 @@ export default class Main extends Component {
                 lembrete: e.target.value
             })
         }
-        console.log(this.state);
     }
 
     render() {
@@ -107,7 +106,7 @@ export default class Main extends Component {
                     lembrete={this.state.lembrete}
                     handleAdd={this.handleAdd}
                     handleChange={this.handleChange} />
-                <Board />
+                <Board list={this.state.list}/>
             </div>
         );
     }
