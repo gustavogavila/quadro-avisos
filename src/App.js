@@ -1,18 +1,18 @@
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import '../node_modules/font-awesome/css/font-awesome.min.css';
+
 import React from "react";
-import Header from "./components/Header/Header";
-import Board from "./components/Board/Board";
-import PostItForm from "./components/PostItForm/PostItForm";
-import PostIt from "./components/PostIt/PostIt";
+import Main from './components/Main/Main'
+import Header from './components/Header/Header'
+import Footer from './components/Footer/Footer'
 
 function App() {
   return (
-    <>
-      <Header />
-      <PostItForm />
-      <Board>
-        <PostIt />
-      </Board>
-    </>
+    <div>
+      <Header/>
+      <Main />
+      <Footer/>
+    </div>
   );
 }
 

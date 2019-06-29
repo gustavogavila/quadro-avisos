@@ -1,9 +1,9 @@
-import React from "react";
+import React, { Component } from "react";
 import "./PostIt.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 
-export default class PostIt extends React.Component {
+export default class PostIt extends Component {
   constructor(props) {
     super(props);
     this.props = props;
