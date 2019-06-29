@@ -25,9 +25,13 @@ export default class Main extends Component {
 
     }
 
+    componentWillMount() {
+        this.getAllPostIts();
+    }
+
     resetState() {
         this.setState({
-            id: Math.round(Math.random() * 10),
+            id: Math.round(Math.random() * 1000),
             remetente: '',
             destinatario: '',
             dataCriacao: moment().format('YYYY-MM-DD'),
@@ -35,6 +39,17 @@ export default class Main extends Component {
             lembrete: '',
             list: []
         })
+    }
+
+    getAllPostIts() {
+        let values = [];
+        let keys = Object.keys(localStorage);
+        let i = keys.length;
+
+        while( i-- ) {
+            values.push(JSON.parse(localStorage.getItem(keys[i])));
+        }
+        console.log(values);
     }
 
     handleAdd() {
