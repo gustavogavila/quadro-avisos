@@ -9,8 +9,8 @@
   box-shadow: 1px 1px 4px #333;
 }
 
-.lido {
-  background-color: #998f00;
+.borda .lido {
+  text-align: right;
 }
 
 .btn {
@@ -24,4 +24,8 @@
   width: 200px;
   right: 0px;
   top: 165px;
+}
+
+.btn:hover {
+  background-color: #000;
 }

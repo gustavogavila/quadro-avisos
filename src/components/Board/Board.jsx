@@ -14,7 +14,9 @@ export default props => {
           dataCriacao={p.dataCriacao}
           lembrete={p.lembrete}
           cor={p.cor}
+          lido={p.lido}
           handleRemove={() => props.handleRemove(p)}
+          handleLido={() => props.handleLido(p)}
         />
       </div>
     ));
