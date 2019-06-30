@@ -22,6 +22,7 @@ export default class Main extends Component {
 
         this.handleAdd = this.handleAdd.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleRemove = this.handleRemove.bind(this);
 
     }
 
@@ -95,6 +96,13 @@ export default class Main extends Component {
         }
     }
 
+    handleRemove(postIt) {
+        console.log(`postIt${postIt.id}`);
+        const key = `postIt${postIt.id}`;
+        localStorage.removeItem(key);
+        this.getAllPostIts();
+    }
+
     render() {
         return (
             <div className="main">
@@ -106,7 +114,7 @@ export default class Main extends Component {
                     lembrete={this.state.lembrete}
                     handleAdd={this.handleAdd}
                     handleChange={this.handleChange} />
-                <Board list={this.state.list}/>
+                <Board list={this.state.list} handleRemove={this.handleRemove}/>
             </div>
         );
     }

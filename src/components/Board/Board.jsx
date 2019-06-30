@@ -7,13 +7,14 @@ export default props => {
     const list = props.list || [];
 
     return list.map(p => (
-      <div key={p.id} className='inline'>
+      <div key={p.id}>
         <PostIt
           remetente={p.remetente}
           destinatario={p.destinatario}
           dataCriacao={p.dataCriacao}
           lembrete={p.lembrete}
           cor={p.cor}
+          handleRemove={() => props.handleRemove(p)}
         />
       </div>
     ));
