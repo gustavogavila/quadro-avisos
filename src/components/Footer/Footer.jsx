@@ -1,8 +1,10 @@
-import React from 'react';
-import './Footer.css';
+import React from "react";
+import "./Footer.css";
 
-export default props => (
+export default function Footer() {
+  return (
     <div className="footer">
-        <p>&reg; Gustavo G. Ávila</p>
+      <p>&reg; Gustavo G. Ávila</p>
     </div>
-)
+  );
+}

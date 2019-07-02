@@ -1,96 +1,43 @@
-import React, { Component } from 'react';
-import moment from 'moment';
+import React, { useState, useEffect } from "react";
+import {
+  getAll,
+  add,
+  remove,
+  markedAsRead
+} from "../../services/PostItService";
+import PostItForm from "../PostItForm/PostItForm";
+import Board from "../Board/Board";
 
-import './Main.css';
-import PostItForm from '../PostItForm/PostItForm';
-import Board from '../Board/Board';
-import { getAll, add, remove, markedAsRead } from '../../services/PostItService';
-import { generateTimestamp } from '../../utils/Utils';
+import "./Main.css";
 
-export default class Main extends Component {
-  constructor(props) {
-    super(props);
-    this.props = props;
-    this.state = {
-      id: generateTimestamp(),
-      remetente: '',
-      destinatario: '',
-      dataCriacao: moment().format('YYYY-MM-DD'),
-      cor: '#ffee00',
-      lembrete: '',
-      lido: false,
-      list: []
-    };
+export default function Main(props) {
+  const [list, setList] = useState([]);
 
-    this.handleAdd = this.handleAdd.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.handleRemove = this.handleRemove.bind(this);
-    this.handleLido = this.handleLido.bind(this);
-  }
+  const getAllPostIts = () => {
+    setList(getAll());
+  };
 
-  componentWillMount() {
-    this.getAllPostIts();
-  }
+  const handleAdd = data => {
+    add(`postIt${data.id}`, data);
+    getAllPostIts();
+  };
 
-  resetState() {
-    this.setState({
-      id: generateTimestamp(),
-      remetente: '',
-      destinatario: '',
-      dataCriacao: moment().format('YYYY-MM-DD'),
-      cor: '#ffee00',
-      lembrete: ''
-    });
-  }
+  const handleRemove = postIt => {
+    remove(`postIt${postIt.id}`);
+    getAllPostIts();
+  };
 
-  getAllPostIts() {
-    const postIts = getAll();
-    this.setState({ ...this.state, list: postIts });
-  }
-
-  handleAdd() {
-    add(`postIt${this.state.id}`, this.state);
-    this.getAllPostIts();
-    this.resetState();
-  }
-
-  handleChange(e) {
-    this.setState({
-      ...this.state,
-      [e.target.id]: e.target.value
-    });
-  }
-
-  handleRemove(postIt) {
-    const key = `postIt${postIt.id}`;
-    remove(key);
-    this.getAllPostIts();
-  }
-
-  handleLido(postIt) {
+  const handleLido = postIt => {
     markedAsRead(postIt);
-    this.getAllPostIts();
-  }
+    getAllPostIts();
+  };
 
-  render() {
-    return (
-      <div className='main'>
-        <PostItForm
-          remetente={this.state.remetente}
-          destinatario={this.state.destinatario}
-          dataCriacao={this.state.dataCriacao}
-          cor={this.state.cor}
-          lembrete={this.state.lembrete}
-          handleAdd={this.handleAdd}
-          handleChange={this.handleChange}
-        />
-        <Board
-          list={this.state.list}
-          handleRemove={this.handleRemove}
-          handleLido={this.handleLido}
-          lido={this.state.lido}
-        />
-      </div>
-    );
-  }
+  useEffect(getAllPostIts, []);
+
+  return (
+    <div className="main">
+      <PostItForm handleAdd={handleAdd} />
+      <Board list={list} handleRemove={handleRemove} handleLido={handleLido} />
+    </div>
+  );
 }

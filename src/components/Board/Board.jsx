@@ -1,26 +1,20 @@
-import React from 'react';
-import './Board.css';
-import PostIt from '../PostIt/PostIt';
+import React from "react";
+import "./Board.css";
+import PostIt from "../PostIt/PostIt";
 
-export default props => {
-  const renderPostIts = () => {
-    const list = props.list || [];
+export default function Board(props) {
+  const { list } = props;
 
-    return list.map(p => (
-      <div key={p.id}>
+  return (
+    <div className="board">
+      {list.map(p => (
         <PostIt
-          remetente={p.remetente}
-          destinatario={p.destinatario}
-          dataCriacao={p.dataCriacao}
-          lembrete={p.lembrete}
-          cor={p.cor}
-          lido={p.lido}
-          handleRemove={() => props.handleRemove(p)}
-          handleLido={() => props.handleLido(p)}
+          key={p.id}
+          postIt={p}
+          handleRemove={props.handleRemove}
+          handleLido={props.handleLido}
         />
-      </div>
-    ));
-  };
-
-  return <div className='board'>{renderPostIts()}</div>;
-};
+      ))}
+    </div>
+  );
+}

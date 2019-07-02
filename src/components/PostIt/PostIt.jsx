@@ -1,40 +1,35 @@
 import React from 'react';
 import './PostIt.css';
 
-export default props => {
+export default function PostIt(props) {
+  const { handleLido, handleRemove, postIt } = props
+  const { remetente, destinatario, dataCriacao, lembrete, cor, lido } = postIt
+  
   return (
     <div
-      style={{ backgroundColor: !props.lido ? props.cor : '#cccccc' }}
+      style={{ backgroundColor: !lido ? cor : '#cccccc' }}
       className='borda'
     >
-      <p>
-        <strong>De:</strong> {props.remetente}
-      </p>
-      <p>
-        <strong>Para:</strong> {props.destinatario}
-      </p>
-      <p>
-        <strong>Data:</strong> {props.dataCriacao}
-      </p>
-      <p>
-        <em>{props.lembrete}</em>
-      </p>
+      <p><strong>De:</strong> {remetente}</p>
+      <p><strong>Para:</strong> {destinatario}</p>
+      <p><strong>Data:</strong> {dataCriacao}</p>
+      <p><em>{lembrete}</em></p>
       <div className='actions'>
         <button
-          style={{ backgroundColor: !props.lido ? props.cor : '#cccccc' }}
+          style={{ backgroundColor: !lido ? cor : '#cccccc' }}
           className='btn'
-          onClick={props.handleLido}
+          onClick={() => handleLido(postIt)}
         >
-          <i className={props.lido ? 'fa fa-undo' : 'fa fa-check'} />
+          <i className={lido ? 'fa fa-undo' : 'fa fa-check'} />
         </button>
         <button
-          style={{ backgroundColor: !props.lido ? props.cor : '#cccccc' }}
+          style={{ backgroundColor: !lido ? cor : '#cccccc' }}
           className='btn'
-          onClick={props.handleRemove}
+          onClick={() => handleRemove(postIt)}
         >
           <i className='fa fa-trash' />
         </button>
       </div>
     </div>
-  );
-};
+  )
+}
