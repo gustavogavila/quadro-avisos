@@ -2,8 +2,13 @@ import React, {useState} from 'react';
 import { generateTimestamp } from '../../utils/Utils';
 import moment from 'moment'
 import './PostItForm.css';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { handleAdd } from '../../actions'
 
-export default function PostItForm(props){
+function PostItForm(props){
+
+  const { handleAdd } = props;
 
   const [remetente, setRemetente] = useState('')
   const [destinatario, setDestinatario] = useState('')
@@ -66,7 +71,7 @@ export default function PostItForm(props){
       </div>
       <div className='col-md-2'>
         <button className='btn btn-primary' onClick={() => {
-          props.handleAdd({
+          handleAdd({
             id: generateTimestamp(),
             remetente,
             destinatario,
@@ -82,3 +87,16 @@ export default function PostItForm(props){
     </div>
   )
 }
+
+const mapStateToProps = store => ({
+  newRemetente: store.postitState.remetente,
+  newDestinatario: store.postitState.destinatario,
+  newDataCriacao: store.postitState.dataCriacao,
+  newCor: store.postitState.cor,
+  newLembrete: store.postitState.lembrete
+})
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ handleAdd }, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostItForm);
